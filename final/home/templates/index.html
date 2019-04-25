@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Home</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the side navigation */
+.sidenav {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+}
+
+
+/* Side navigation links */
+.sidenav a {
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.sidenav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the content */
+.content {
+  margin-left: 300px;
+  padding-left: 20px;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  width: 33%;
+}
+th {
+  text-align: left;
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav"></div>
+
+<div class="content">
+  <h1>{{ HEADER_CONTENT }}</h1>
+  <h2>{{ TAG_CONTENT }}</h2>
+  {% if page_list|length > 1 %}
+  	{% for page,desc in page_list.items %}
+  		<h3>{{page}}</h3>
+  		<p>{{desc}}</p>
+  	{% endfor %}
+  {% endif %}
+  {% if player_list|length > 1 %}
+  	<table style="width:90%">
+  	<tr>
+  	  <th style="text-align:center">Player Name</th>
+  	  <th style="text-align:center">Age</th> 
+      <th style="text-align:center">Score</th>
+  	</tr>
+  	{% for player in player_list %}
+  	<tr>
+  	  <th>{{player}}</th>
+  	  <th>{{player}}</th> 
+      <th>{{player}}</th>
+  	</tr>
+  	{% endfor %}
+  {% endif %}
+</div>
+
+</body>
+<script>
+function goto_team_page(teamID){
+	window.location.replace("/home/"+teamID);
+}
+</script>
+</html>
