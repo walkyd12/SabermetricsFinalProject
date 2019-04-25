@@ -7,7 +7,9 @@ First make sure you can run django with python3 from your machine.
 Once the dependecies are installed for django and python3, place pybaseball in /final/home and reinstall it.
 
 Now, to run the server, run the command
-    python3 manage.py runserver
+~~~~
+python3 manage.py runserver
+~~~~
 from the final/ directory.
 
 ## Where to look
