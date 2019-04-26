@@ -18,6 +18,5 @@ For quick reference, look at final/home/templates/index.html for the layout of t
 final/stat_calculator is where all of the code will go for calculating the stats.
 final/home/views.py is what actaully completes the html and displays what we want.
 
-## Where to go
-If you can't figure out Django right away, just focus on getting the stats together. The output format should be a dictionary of player names and their calculated stats. This can be easily implemented and displayed in this website.
-
+## Current State
+The current state of the project is the minimal amount to be calculating and displaying our new stat. In a rough format, data is collected from statcast and multiple values are used to calculate the new leverage efficiency stat. Short-circuits do not quite work yet, meaning that each page loaded has to pull a full statcast csv from disk. Future plans are to incorporate something like a picture, clean the data, and short-circuit so that the large csv file loading can be bypassed.
