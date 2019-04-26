@@ -60,7 +60,15 @@ def index(request):
 # Look in /FinalProject/final/home/stat_calculator.py for calculate_leverage_eff_stat(teamID)
 
 def team(request, teamID):
-	rendered = render_to_string('index.html', { 'HEADER_CONTENT': team_name_lookup(teamID), 'TAG_CONTENT': 'team desc', 'player_list':['hi','hello']  })
-
+	get_leverage_index("Top 7", "2", "123", "-4")
+	lev = calculate_leverage_eff_stat(teamID)
+	player_list = []
+	list_list = []
+	for p in lev:
+		list_list.append(lev[p])
+		player_list.append(p)
+		lev[p][2] = str((float(lev[p][3]) - (float(lev[p][1]) - float(lev[p][0]))) / float(lev[p][1]))
+	print(list_list)
+	rendered = render_to_string('index.html', { 'HEADER_CONTENT': team_name_lookup(teamID), 'TAG_CONTENT': '', 'player_list':lev, 'list_list':lev  })
 	return HttpResponse(insert_nav(rendered))
 

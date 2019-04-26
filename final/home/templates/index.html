@@ -52,7 +52,7 @@ table, th, td {
 }
 th, td {
   padding: 5px;
-  width: 33%;
+  width: 20%;
 }
 th {
   text-align: left;
@@ -76,14 +76,17 @@ th {
   	<table style="width:90%">
   	<tr>
   	  <th style="text-align:center">Player Name</th>
-  	  <th style="text-align:center">Age</th> 
-      <th style="text-align:center">Score</th>
+  	  <th style="text-align:center">Leverage Gained</th> 
+      <th style="text-align:center">Leverage Possible</th>
+      <th style="text-align:center">Leverage Efficiency</th>
+      <th style="text-align:center">At bats</th>
   	</tr>
-  	{% for player in player_list %}
+  	{% for player,list in player_list.items %}
   	<tr>
   	  <th>{{player}}</th>
-  	  <th>{{player}}</th> 
-      <th>{{player}}</th>
+  	  {% for l in list %}
+  	  	<th>{{ l|cut:"\n" }}</th>
+  	  {% endfor %}
   	</tr>
   	{% endfor %}
   {% endif %}
