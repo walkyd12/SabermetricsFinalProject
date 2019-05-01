@@ -49,6 +49,17 @@ def get_teams():
 
 	return teamDict
 
+def player_name_lookup(playerIDs):
+	
+	nameDF = pd.read_csv('./home/local_data/master.csv', encoding = "ISO-8859-1")
+
+	playerNames = dict()
+	for key, val in playerIDs.items():
+		newKey = nameDF.loc[(nameDF['mlb_id'] == key)]['mlb_name'].values[0]
+		playerNames[newKey] = val
+
+	return playerNames
+
 def team_name_lookup(teamID):
 	teams = get_teams()
 	if(teamID in teams):
@@ -150,7 +161,7 @@ def get_leverage_index(inning, outs, bases, scoreDif):
 def calculate_leverage_eff_stat(teamID):
 	levEffDict = {}
 	cwd = os.getcwd()
-
+	
 	if os.path.exists(cwd + '/home/local_data/'+teamID+'DataLocal.txt'):
 		oldFile = open(cwd + '/home/local_data/'+teamID+'DataLocal.txt', 'r')
 		line = oldFile.readline()
@@ -165,7 +176,6 @@ def calculate_leverage_eff_stat(teamID):
 	# Do the calculations, store in levEffDict
 	statcastData = create_statcast_CSV('2017')
 	statcastData = statcastData.loc[((statcastData['home_team'] == teamID) & (statcastData['inning_topbot'] == 'Bot')) | ((statcastData['away_team'] == teamID) & (statcastData['inning_topbot'] == 'Top')), ["batter", "inning_topbot", "inning", "on_1b", "on_2b", "on_3b", "bat_score", "fld_score", "outs_when_up", "post_bat_score", "post_fld_score", "des"]]
-
 	for i in range (len(statcastData)):
 	
 		leverageGained = 0
@@ -256,6 +266,8 @@ def calculate_leverage_eff_stat(teamID):
 		newFile.write(newLine)
 	newFile.close()
 	# Return the final list
+	levEffDict = player_name_lookup(levEffDict)
+
 	return levEffDict
 
 #####################################################################
@@ -293,4 +305,3 @@ def create_statcast_CSV(yearID):
 
 	print("Statcast complete!")
 	return file
-
