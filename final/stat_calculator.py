@@ -259,12 +259,6 @@ def calculate_leverage_eff_stat(teamID):
 				else:		
 					levEffDict[statcastData.iloc[i]['batter']] = [leverageGained, leveragePossible, 0, 1]
 
-	newFile = open(cwd + '/home/local_data/'+teamID+'DataLocal.txt', 'w+')
-	print("Creating new local team data file...")
-	for batter in levEffDict:
-		newLine = str(batter) + ',' + str(levEffDict[batter][0])+ ',' + str(levEffDict[batter][1]) + ',' + str(levEffDict[batter][2]) + str(levEffDict[batter][3])
-		newFile.write(newLine)
-	newFile.close()
 	# Return the final list
 	levEffDict = player_name_lookup(levEffDict)
 
